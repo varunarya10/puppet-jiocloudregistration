@@ -1,0 +1,22 @@
+#This file is managed by puppet files
+KEYSTONE_HOST =  <%= @fqdn %>
+KEYSTONE_ADMIN_TOKEN =  <%= @keystone_admin_token %>
+KEYSTONE_ADMIN_PORT =  <%= @keystone_admin_port %>
+KEYSTONE_PUBLIC_PORT =  <%= @keystone_public_port %>
+API_VERSION_V3 = "v3"
+KEYSTONE_API_VERSION = API_VERSION_V3
+
+_admin_data = {"host_name":KEYSTONE_HOST, "port":KEYSTONE_ADMIN_PORT, "api_version":KEYSTONE_API_VERSION}
+_public_data = {"host_name":KEYSTONE_HOST, "port":KEYSTONE_PUBLIC_PORT, "api_version":KEYSTONE_API_VERSION}
+<% if @listen_ssl == true %>
+KEYSTONE_ADMIN_ENDPOINT = "https://{host_name}:{port}/{api_version}".format(**_admin_data)
+KEYSTONE_PUBLIC_ENDPOINT = "https://{host_name}:{port}/{api_version}".format(**_public_data)
+<% else %>
+KEYSTONE_ADMIN_ENDPOINT = "http://{host_name}:{port}/{api_version}".format(**_admin_data)
+KEYSTONE_PUBLIC_ENDPOINT = "http://{host_name}:{port}/{api_version}".format(**_public_data)
+<% end %>
+DEFAULT_PROJECT_NAME = <%= @default_project_name %>
+DEFAULT_ROLE_NAME = <%= @default_role_name %>
+DEFAULT_DOMAIN_NAME = <%= @default_domain_name %>
+PROJECT_NAME_PREFIX = <%= @project_name_prefix %>
+
