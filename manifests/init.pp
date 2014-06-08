@@ -10,6 +10,7 @@
 #
 class jiocloud_registration(
   $fqdn,
+  $keystone_add,
   $listen_ssl,
   $horizon_key,
   $horizon_cert,
